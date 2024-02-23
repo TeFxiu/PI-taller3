@@ -1,0 +1,17 @@
+FROM node
+
+WORKDIR /
+
+COPY frontpi/package.json .
+COPY frontpi/package-lock.json .
+
+
+RUN npm install
+
+COPY frontpi/. .
+
+RUN npm run build
+
+EXPOSE 3000
+
+CMD [ "npm", "start"]

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db_clientespi:
+    image: mysql
+    restart: always
+    container_name: db_clientespi
+    environment:
+      - MYSQL_ROOT_PASSWORD=paraCoder
+      - MYSQL_DATABASE=clientespi
+    ports:
+      - 5001:3306
+    volumes:
+      - ./modelo.sql:/docker-entrypoint-initdb.d/modelo.sql
+
+  app:
+    container_name: back_clientespi
+    build: 
+      context: .
+      dockerfile: Dockerfile.back
+    depends_on:
+      - db_clientespi
+    links:
+      - db_clientespi
+    ports:
+      - 5000:5000
+
+  front:
+    container_name: front_clientespi
+    build: 
+      context: .
+      dockerfile: ./frontpi/Dockerfile.front
+    depends_on:
+      - app
+    links:
+      - app
+    ports:
+      - 3000:3000

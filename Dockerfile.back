@@ -1,0 +1,18 @@
+FROM python
+
+# Set the working directory
+WORKDIR /backend
+
+ENV FLASK_APP=app.py
+
+ENV FLASK_RUN_HOST=0.0.0.0
+
+COPY modulos.txt modulos.txt
+
+RUN pip install -r modulos.txt
+
+COPY . .
+
+EXPOSE 5000
+
+CMD ["flask", "run"]
