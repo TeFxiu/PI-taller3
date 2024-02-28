@@ -18,7 +18,10 @@ def inicio():
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM clientes')
     datos = cur.fetchall()
-    return jsonify({"Clientes registrados": datos})
+    datos1 = []
+    for dato in datos:
+        datos1.append({"ID": dato[0], "Nombres": dato[1], "Apellidos": dato[2]})
+    return jsonify(datos1)
 
 @app.route('/', methods=['POST'])
 def crear():

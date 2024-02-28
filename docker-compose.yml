@@ -24,15 +24,3 @@ services:
       - db_clientespi
     ports:
       - 5000:5000
-
-  front:
-    container_name: front_clientespi
-    build: 
-      context: .
-      dockerfile: ./frontpi/Dockerfile.front
-    depends_on:
-      - app
-    links:
-      - app
-    ports:
-      - 3000:3000
