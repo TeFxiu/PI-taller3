@@ -53,6 +53,3 @@ def borrar_cliente(id):
     cur.execute('DELETE FROM clientes WHERE ID = {0}'.format(id))
     mysql.connection.commit()
     return jsonify({"Mensaje": "Cliente eliminado"})
-
-if __name__ == '__main__':
-    app.run(debug=True)
